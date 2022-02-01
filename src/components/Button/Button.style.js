@@ -4,20 +4,17 @@ export const ButtonAtom = styled.div`
         border: 2px  #26C5FF solid;
         border-radius: 10px;
         margin: 50px;
-        padding: 10px 10px;
         color:  #26C5FF;
         text-align: center;
+        padding: 10px 20px;
         &:hover{
                 border: 3px  #26C5FF solid;
                 cursor:pointer;
         }
-        a:hover{
-                border-bottom: 1px solid #26C5FF
-        }
         a, a:link, a:visited, a:focus, a:hover, a:active {
+                display: block;
                 text-decoration: none;
                 color: #26C5FF;
-
         }
 
 `

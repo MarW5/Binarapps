@@ -28,6 +28,13 @@ export const WordContainer = styled.div`
        height: 40vh;
 
 `
+export const Error = styled.p`
+        width: 100%;
+        height: 30px;
+        color: red;
+        font-size: 16px;
+        margin: 5px;
+`
 
 export const WordDiv = styled.div`
        width: 150px;

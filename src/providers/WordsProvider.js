@@ -6,10 +6,12 @@ export const WordsContext = React.createContext({
         words: [],
         correctWords: [],
         category: "",
+        finalScore: "",
         handleSelectWord: () => {},
         correctView: () => {},
         handleGetData: () => {},
-        returnScore: ()=> {},
+        returnScore: () => {},
+        resetGame: () => {},
 })
 
 const WordsProvider = ({children }) =>{
@@ -17,7 +19,7 @@ const WordsProvider = ({children }) =>{
         const [category, setCategory] = useState("")
         const  [words, setWords] = useState([])
         const [answers, setAnswers] = useState([])
-        const  [btnActive, setBtnActive] = useState(false)
+        const  [finalScore, setFinalScore] = useState("")
         const {getData} = GetDataAPI()
 
         useEffect(()=>{
@@ -38,7 +40,6 @@ const WordsProvider = ({children }) =>{
                                 }
                         )
                 })
-                console.log(correctValues)
                 setData(correctValues)
         }
         const handleSelectWord = (word) =>{
@@ -64,7 +65,6 @@ const WordsProvider = ({children }) =>{
 
         const correctView = ( chosenWord ) => {
                 answers.filter((item) => {
-                        console.log(item)
                         if(item === chosenWord.name){
                               return chosenWord["correct"] = "good";
                         }
@@ -72,23 +72,27 @@ const WordsProvider = ({children }) =>{
         }
 
         const returnScore =()=>{
-                let sum = 0;
+                let good = 0;
                 let bad = 0;
-                data.forEach((element , i)=>{
+
+                words.forEach(element=>{
                         if (element.correct === "good"){
-                                sum += 1
+                                good += 1
                         } else {
-                                console.log(element)
                                 bad += 1
                         }
                 })
-                const results = sum*2 - bad
-                console.log(sum)
-                console.log(bad)
-                console.log(results)
+                let score  = (good*2) - (bad + (answers.length - good));
+                setFinalScore(score);
+        }
+        const resetGame = () => {
+                setData([])
+                setWords([])
+                setAnswers([])
+                setCategory("")
         }
         return(
-                <WordsContext.Provider value={{data, words, category, handleSelectWord, correctView, handleGetData , returnScore}}>
+                <WordsContext.Provider value={{data, words, category, handleSelectWord, correctView, handleGetData , returnScore, finalScore, resetGame}}>
                         {children}
                 </WordsContext.Provider>
         )

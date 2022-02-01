@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 
 export default function Button({ label, pathName= "#", handleClick }) {
         return(
-                <ButtonAtom onClick={handleClick}>
-                        <Link to={pathName} >
+                <ButtonAtom>
+                        <Link to={pathName} onClick={handleClick} >
                                 {label}
                         </Link>
                 </ButtonAtom>
